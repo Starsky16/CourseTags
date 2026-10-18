@@ -17,7 +17,7 @@ ClassIsland 课程标签提供者插件：为科目附加课程标签（户外�
 
 - 宿主：ClassIsland **2.1.0.1 及以上**（插件 API 契约 `2.0.0.0`）。
 - 构建目标：`net8.0`，不依赖 Windows 专属 API，设计上支持 Windows / macOS / Linux（Linux 需 X11，不支持 Wayland）。
-- 验证状态：Windows + ClassIsland 2.1.0.1 已实机验证；Linux / macOS 尚未实机验证。
+- 验证状态：Windows 与 Linux（X11，arm64）已在 ClassIsland 2.1.0.1 实机验证；macOS 尚未实机验证。
 
 ## 消费端接入（其他插件）
 

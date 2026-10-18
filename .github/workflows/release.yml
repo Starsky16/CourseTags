@@ -1,0 +1,54 @@
+name: 正式发布
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: '要发布的 tag（需已存在，如 v0.1.0.0）'
+        required: true
+jobs:
+  release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: release-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+          fetch-depth: 0
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: 校验 tag 与 manifest 版本一致
+        shell: pwsh
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          $manifestVersion = (Select-String -Path manifest.yml -Pattern '^version:\s*(.+)$').Matches.Groups[1].Value.Trim()
+          $tagVersion = $env:RELEASE_TAG.TrimStart('v')
+          if ($manifestVersion -ne $tagVersion) {
+            throw "tag 版本 $tagVersion 与 manifest.yml 版本 $manifestVersion 不一致"
+          }
+          Write-Host "版本校验通过：$manifestVersion"
+      - name: Test
+        run: dotnet test Tests/CourseTags.Tests/CourseTags.Tests.csproj
+      - name: Publish cipx
+        shell: pwsh
+        run: tools/publish.ps1
+      - name: Create release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: >
+          gh release create "$RELEASE_TAG" cipx/CourseTags.cipx cipx/checksums.md
+          --verify-tag
+          --title "CourseTags $RELEASE_TAG"
+          --generate-notes

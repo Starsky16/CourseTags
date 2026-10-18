@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0-windows</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <!-- 确保编译输出包含所有包的 dll（宿主插件目录按 bin 输出整拷部署） -->
@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <ClassIslandPluginSdkVersion>1.7.106.2-dev-v2</ClassIslandPluginSdkVersion>
+        <ClassIslandPluginSdkVersion>2.1.0.1</ClassIslandPluginSdkVersion>
     </PropertyGroup>
 
     <ItemGroup>

@@ -26,6 +26,12 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Compile Update="Controls\CourseTagAttachedSettingsControl.axaml.cs">
+            <DependentUpon>CourseTagAttachedSettingsControl.axaml</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
         <None Update="manifest.yml">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>

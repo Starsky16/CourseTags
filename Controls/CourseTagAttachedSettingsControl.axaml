@@ -1,0 +1,16 @@
+<ci:AttachedSettingsControlBase x:TypeArguments="courseTags:CourseTagData"
+                                x:Class="CourseTags.Controls.CourseTagAttachedSettingsControl"
+                                xmlns="https://github.com/avaloniaui"
+                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                xmlns:ci="http://classisland.tech/schemas/xaml/core"
+                                xmlns:courseTags="clr-namespace:CourseTags"
+                                mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="400">
+    <StackPanel Spacing="4">
+        <TextBlock TextWrapping="Wrap" Opacity="0.7"
+                   Text="给该科目打标签，供其他插件按标签决定运行状态。启用后，多个标签用英文逗号分隔，也可输入自定义标签。" />
+        <TextBox x:Name="TagsTextBox"
+                 Watermark="如：outdoor, computer-room" />
+    </StackPanel>
+</ci:AttachedSettingsControlBase>

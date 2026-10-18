@@ -1,0 +1,46 @@
+name: dev 预发布构建
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+    # 提交信息含 [build] 标记才触发构建；注意写其他提交信息时避开该字面量
+jobs:
+  build:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[build]')
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: dev-build
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Test
+        run: dotnet test Tests/CourseTags.Tests/CourseTags.Tests.csproj
+      - name: Publish cipx
+        shell: pwsh
+        run: tools/publish.ps1
+      - name: Delete existing dev-build release
+        shell: bash
+        run: gh release delete dev-build --yes --cleanup-tag || true
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Create dev-build release
+        shell: bash
+        run: >
+          gh release create dev-build --target "$GITHUB_SHA" --prerelease
+          --title "dev-build"
+          --notes "dev 预发布构建（未签名；版本取自 manifest.yml，仅作开发预览）。"
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Upload cipx
+        shell: bash
+        run: gh release upload dev-build cipx/*.cipx --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}

@@ -20,6 +20,20 @@ public class CourseTagDataContractTests
     }
 
     [Fact]
+    public void IsAttachSettingsEnabled_RaisesPropertyChanged()
+    {
+        // 宿主科目编辑页的 Expander.IsExpanded 与内容区 IsEnabled 均绑定该属性，
+        // 不发出通知会导致开启开关后同会话内输入框仍为禁用态（实机验证发现的缺陷）。
+        var data = new CourseTagData();
+        var raised = new List<string?>();
+        data.PropertyChanged += (_, e) => raised.Add(e.PropertyName);
+
+        data.IsAttachSettingsEnabled = true;
+
+        Assert.Contains(nameof(CourseTagData.IsAttachSettingsEnabled), raised);
+    }
+
+    [Fact]
     public void NewInstance_DefaultsMatchHostConvention()
     {
         // 与宿主自带附加设置一致：IsAttachSettingsEnabled 默认 false（未启用不回写，档案干净）。

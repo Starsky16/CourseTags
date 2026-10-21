@@ -25,6 +25,7 @@
     <Compile Include="../../TagDefinition.cs" Link="Tags/TagDefinition.cs" />
     <Compile Include="../../TagCatalog.cs" Link="Tags/TagCatalog.cs" />
     <Compile Include="../../TagNormalizer.cs" Link="Tags/TagNormalizer.cs" />
+    <Compile Include="../../TagRegistry.cs" Link="Tags/TagRegistry.cs" />
   </ItemGroup>
 
 </Project>

@@ -6,11 +6,15 @@
                                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                                 xmlns:ci="http://classisland.tech/schemas/xaml/core"
                                 xmlns:courseTags="clr-namespace:CourseTags"
-                                mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="400">
-    <StackPanel Spacing="4">
+                                mc:Ignorable="d" d:DesignHeight="220" d:DesignWidth="400">
+    <StackPanel Spacing="6">
         <TextBlock TextWrapping="Wrap" Opacity="0.7"
-                   Text="给该科目打标签，供其他插件按标签决定运行状态。启用后，多个标签用英文逗号分隔，也可输入自定义标签。" />
-        <TextBox x:Name="TagsTextBox"
-                 Watermark="如：outdoor, computer-room" />
+                   Text="给该科目打标签，供其他插件按标签决定运行状态。点击下方标签可增删；也可在输入框输入别名（如“机房”）或新标签（如 lab-room）后回车。" />
+        <WrapPanel x:Name="ChipsPanel" Orientation="Horizontal" />
+        <Grid ColumnDefinitions="*,Auto">
+            <TextBox x:Name="TagInputBox" Grid.Column="0" Watermark="如：机房、outdoor、lab-room" />
+            <Button x:Name="AddButton" Grid.Column="1" Content="添加" Margin="8,0,0,0" />
+        </Grid>
+        <TextBlock x:Name="ErrorTextBlock" Foreground="#C62828" TextWrapping="Wrap" IsVisible="False" />
     </StackPanel>
 </ci:AttachedSettingsControlBase>

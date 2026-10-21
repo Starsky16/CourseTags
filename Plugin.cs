@@ -4,6 +4,7 @@ using ClassIsland.Core.Attributes;
 using ClassIsland.Core.Extensions.Registry;
 using CourseTags.Controls;
 using CourseTags.Services;
+using CourseTags.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -20,5 +21,8 @@ public class Plugin : PluginBase
 
         // 科目编辑页附加设置区出现"课程标签"卡片
         services.AddAttachedSettingsControl<CourseTagAttachedSettingsControl>();
+
+        // 设置窗口：标签定义管理
+        services.AddSettingsPage<TagManagementPage>();
     }
 }

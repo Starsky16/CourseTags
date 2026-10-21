@@ -1,0 +1,42 @@
+<ci:SettingsPageBase x:Class="CourseTags.Views.TagManagementPage"
+                     xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:ci="http://classisland.tech/schemas/xaml/core"
+                     mc:Ignorable="d" d:DesignWidth="820" d:DesignHeight="560">
+    <Grid Margin="16" RowDefinitions="Auto,*,Auto" ColumnDefinitions="260,*">
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="课程标签定义"
+                   FontSize="18" FontWeight="SemiBold" Margin="0,0,0,12" />
+        <ListBox x:Name="TagListBox" Grid.Row="1" Grid.Column="0" Margin="0,0,12,12"
+                 SelectionChanged="TagListBox_OnSelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Spacing="0">
+                        <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" />
+                        <TextBlock Text="{Binding Slug}" Opacity="0.6" FontSize="11" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="1" Grid.Column="1" Spacing="8">
+            <TextBlock Text="slug（仅小写字母、数字、连字符）" Opacity="0.7" />
+            <TextBox x:Name="SlugTextBox" Watermark="如：lab-room" />
+            <TextBlock Text="显示名" Opacity="0.7" />
+            <TextBox x:Name="DisplayNameTextBox" Watermark="如：实验课" />
+            <TextBlock Text="颜色" Opacity="0.7" />
+            <ComboBox x:Name="ColorComboBox" HorizontalAlignment="Stretch" />
+            <TextBlock Text="别名（逗号分隔，可为中文）" Opacity="0.7" />
+            <TextBox x:Name="AliasesTextBox" Watermark="如：实验, 实验课" />
+            <TextBlock x:Name="ErrorTextBlock" Foreground="#C62828" TextWrapping="Wrap" IsVisible="False" />
+            <TextBlock x:Name="HintTextBlock" Opacity="0.7" TextWrapping="Wrap" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="8">
+            <Button x:Name="AddButton" Content="新增" Click="AddButton_OnClick" />
+            <Button x:Name="SaveButton" Content="保存" Click="SaveButton_OnClick" />
+            <Button x:Name="DeleteButton" Content="删除" Click="DeleteButton_OnClick" />
+            <Button x:Name="ExportButton" Content="导出…" Click="ExportButton_OnClick" />
+            <Button x:Name="ImportButton" Content="导入…" Click="ImportButton_OnClick" />
+        </StackPanel>
+    </Grid>
+</ci:SettingsPageBase>

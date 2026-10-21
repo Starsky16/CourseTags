@@ -26,6 +26,9 @@
     <Compile Include="../../TagCatalog.cs" Link="Tags/TagCatalog.cs" />
     <Compile Include="../../TagNormalizer.cs" Link="Tags/TagNormalizer.cs" />
     <Compile Include="../../TagRegistry.cs" Link="Tags/TagRegistry.cs" />
+    <Compile Include="../../CourseTagMatcher.cs" Link="Tags/CourseTagMatcher.cs" />
+    <Compile Include="../../Diagnostics/TagDiagnostics.cs" Link="Diagnostics/TagDiagnostics.cs" />
+    <Compile Include="../../Diagnostics/TagRewriter.cs" Link="Diagnostics/TagRewriter.cs" />
   </ItemGroup>
 
 </Project>
